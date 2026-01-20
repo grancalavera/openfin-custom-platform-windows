@@ -10,7 +10,7 @@
       "defaultHeight": 800,
       "defaultCentered": true,
       "autoShow": true,
-      "frame": true,
+      "frame": false,
       "resizable": true,
       "contextMenu": true
     }
@@ -34,6 +34,14 @@
                           "componentName": "view",
                           "componentState": {
                             "name": "view-1",
+                            "url": "http://192.168.68.65:5173"
+                          }
+                        },
+                        {
+                          "type": "component",
+                          "componentName": "view",
+                          "componentState": {
+                            "name": "view-1-1",
                             "url": "http://192.168.68.65:5173"
                           }
                         }
