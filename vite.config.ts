@@ -14,6 +14,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         provider: resolve(__dirname, 'provider.html'),
+        platformWindow: resolve(__dirname, 'platform-window.html'),
       },
     },
   },
