@@ -21,15 +21,69 @@
         "layout": {
           "content": [
             {
-              "type": "stack",
+              "type": "column",
               "content": [
                 {
-                  "type": "component",
-                  "componentName": "view",
-                  "componentState": {
-                    "name": "main-view",
-                    "url": "http://192.168.68.65:5173"
-                  }
+                  "type": "row",
+                  "content": [
+                    {
+                      "type": "stack",
+                      "content": [
+                        {
+                          "type": "component",
+                          "componentName": "view",
+                          "componentState": {
+                            "name": "view-1",
+                            "url": "http://192.168.68.65:5173"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "stack",
+                      "content": [
+                        {
+                          "type": "component",
+                          "componentName": "view",
+                          "componentState": {
+                            "name": "view-2",
+                            "url": "https://www.google.com"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "row",
+                  "content": [
+                    {
+                      "type": "stack",
+                      "content": [
+                        {
+                          "type": "component",
+                          "componentName": "view",
+                          "componentState": {
+                            "name": "view-3",
+                            "url": "https://www.github.com"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "stack",
+                      "content": [
+                        {
+                          "type": "component",
+                          "componentName": "view",
+                          "componentState": {
+                            "name": "view-4",
+                            "url": "https://openfin.co"
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
