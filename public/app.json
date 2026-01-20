@@ -4,7 +4,7 @@
   },
   "platform": {
     "uuid": "openfin-custom-platform",
-    "autoShow": true,
+    "autoShow": false,
     "providerUrl": "http://192.168.68.65:5173/provider.html",
     "defaultWindowOptions": {
       "url": "http://192.168.68.65:5173/platform-window.html",

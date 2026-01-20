@@ -12,6 +12,48 @@
       #layout-container {
         height: calc(100% - 58px);
       }
+
+      /* Tab styling */
+      .lm_tab {
+        border-top: none !important;
+        border-top-left-radius: 8px !important;
+        border-top-right-radius: 8px !important;
+        background-color: #f0f0f0 !important;
+        color: #333 !important;
+        padding-right: 50px !important;
+      }
+
+      .lm_tab .lm_title {
+        color: #333 !important;
+        font-weight: 600 !important;
+        max-width: calc(100% - 50px) !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+      }
+
+      /* Replace X with "close" text */
+      .lm_tab .lm_close_tab {
+        background-image: none !important;
+        width: auto !important;
+        font-size: 12px !important;
+        font-weight: 700 !important;
+        color: #555 !important;
+        right: 8px !important;
+        position: absolute !important;
+      }
+
+      .lm_tab .lm_close_tab::before {
+        content: 'close';
+      }
+
+      .lm_tab .lm_close_tab:hover {
+        color: #000 !important;
+      }
+
+      /* Active tab styling */
+      .lm_tab.lm_active {
+        background-color: #e0e0e0 !important;
+      }
     </style>
   </head>
   <body>
