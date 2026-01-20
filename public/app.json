@@ -1,0 +1,41 @@
+{
+  "runtime": {
+    "version": "stable"
+  },
+  "platform": {
+    "uuid": "openfin-custom-platform",
+    "autoShow": false,
+    "defaultWindowOptions": {
+      "defaultWidth": 1280,
+      "defaultHeight": 800,
+      "defaultCentered": true,
+      "autoShow": true,
+      "frame": true,
+      "resizable": true,
+      "contextMenu": true
+    }
+  },
+  "snapshot": {
+    "windows": [
+      {
+        "layout": {
+          "content": [
+            {
+              "type": "stack",
+              "content": [
+                {
+                  "type": "component",
+                  "componentName": "view",
+                  "componentState": {
+                    "name": "main-view",
+                    "url": "http://192.168.68.65:5173"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
