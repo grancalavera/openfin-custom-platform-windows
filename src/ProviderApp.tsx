@@ -7,6 +7,98 @@ function ProviderApp() {
     async function initPlatform() {
       if (typeof fin !== 'undefined') {
         await fin.Platform.init({})
+
+        const platform = fin.Platform.getCurrentSync()
+        await platform.createWindow({
+          url: 'http://192.168.68.65:5173/platform-window.html',
+          defaultWidth: 1280,
+          defaultHeight: 800,
+          defaultCentered: true,
+          autoShow: true,
+          frame: false,
+          resizable: true,
+          contextMenu: true,
+          layout: {
+            content: [
+              {
+                type: 'column',
+                content: [
+                  {
+                    type: 'row',
+                    content: [
+                      {
+                        type: 'stack',
+                        content: [
+                          {
+                            type: 'component',
+                            componentName: 'view',
+                            componentState: {
+                              name: 'view-1',
+                              url: 'http://192.168.68.65:5173'
+                            }
+                          },
+                          {
+                            type: 'component',
+                            componentName: 'view',
+                            componentState: {
+                              name: 'view-1-1',
+                              url: 'http://192.168.68.65:5173'
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        type: 'stack',
+                        content: [
+                          {
+                            type: 'component',
+                            componentName: 'view',
+                            componentState: {
+                              name: 'view-2',
+                              url: 'https://www.google.com'
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    type: 'row',
+                    content: [
+                      {
+                        type: 'stack',
+                        content: [
+                          {
+                            type: 'component',
+                            componentName: 'view',
+                            componentState: {
+                              name: 'view-3',
+                              url: 'https://www.github.com'
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        type: 'stack',
+                        content: [
+                          {
+                            type: 'component',
+                            componentName: 'view',
+                            componentState: {
+                              name: 'view-4',
+                              url: 'https://openfin.co'
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        })
+
         setIsReady(true)
       }
     }
