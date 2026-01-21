@@ -5,6 +5,6 @@
   "platform": {
     "uuid": "openfin-custom-platform",
     "autoShow": false,
-    "providerUrl": "http://192.168.68.65:5173/provider.html"
+    "providerUrl": "http://10.20.0.224:5173/provider.html"
   }
 }
