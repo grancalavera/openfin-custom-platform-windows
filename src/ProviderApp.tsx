@@ -10,22 +10,10 @@ function ProviderApp() {
 
         const platform = fin.Platform.getCurrentSync();
 
-        const windowWidth = 640
-        const windowHeight = 800
-
-        const windowOptions = {
-          url: "http://192.168.68.68:5173/platform-window.html",
-          defaultWidth: windowWidth,
-          defaultHeight: windowHeight,
-          autoShow: true,
-          frame: false,
-          resizable: true,
-          contextMenu: true,
-        }
+        const windowWidth = 640;
 
         await Promise.all([
           platform.createWindow({
-            ...windowOptions,
             defaultLeft: 100,
             defaultTop: 100,
             layout: {
@@ -38,7 +26,7 @@ function ProviderApp() {
                       componentName: "view",
                       componentState: {
                         name: "main-view-1",
-                        url: "http://192.168.68.68:5173",
+                        url: "http://192.168.68.58:5173",
                       },
                     },
                   ],
@@ -47,7 +35,6 @@ function ProviderApp() {
             },
           }),
           platform.createWindow({
-            ...windowOptions,
             defaultLeft: 100 + windowWidth + 20,
             defaultTop: 100,
             layout: {
@@ -60,7 +47,7 @@ function ProviderApp() {
                       componentName: "view",
                       componentState: {
                         name: "main-view-2",
-                        url: "http://192.168.68.68:5173",
+                        url: "http://192.168.68.58:5173",
                       },
                     },
                   ],
@@ -68,7 +55,7 @@ function ProviderApp() {
               ],
             },
           }),
-        ])
+        ]);
 
         setIsReady(true);
       }
