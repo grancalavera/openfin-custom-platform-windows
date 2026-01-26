@@ -8,7 +8,7 @@
     "providerUrl": "http://192.168.68.58:5173/provider.html",
     "defaultWindowOptions": {
       "url": "http://192.168.68.58:5173/platform-window.html",
-      "defaultWidth": 800,
+      "defaultWidth": 640,
       "defaultHeight": 800,
       "defaultCentered": true,
       "autoShow": true,

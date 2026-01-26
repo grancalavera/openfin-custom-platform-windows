@@ -1,10 +1,15 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import ProviderApp from './ProviderApp'
+import { StrictMode, Suspense } from "react";
+import { createRoot } from "react-dom/client";
+import "./index.css";
+import ProviderApp from "./ProviderApp";
+import { initializePlatform } from "./platform";
 
-createRoot(document.getElementById('root')!).render(
+const platformInitialized = initializePlatform();
+
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ProviderApp />
+    <Suspense fallback={<div>Loading...</div>}>
+      <ProviderApp platformInitialized={platformInitialized} />
+    </Suspense>
   </StrictMode>,
-)
+);
