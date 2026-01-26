@@ -81,3 +81,4 @@ Our `platform-window.html` contains only the essential `#layout-container` div r
 - **Full edge-to-edge content** - views fill the entire window
 
 The `src/platform-window.ts` script calls `fin.Platform.Layout.init()` to initialize the layout system into the container.
+/
