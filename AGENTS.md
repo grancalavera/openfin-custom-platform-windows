@@ -4,18 +4,34 @@ This is an **OpenFin application** built with **Vite**, **React 19**, and **Type
 
 ## Development Environment
 
-- **Dev Server URL**: `http://192.168.68.65:5173`
-- Do NOT use `localhost` - always use the network IP above
-- Testing is done on another machine in the same network
+- Developed on **Mac**, tested on **Windows via Parallels**
+- Run `npm run dev` to start the dev server (uses `--host` flag for network access)
+- Vite will display available Network URLs in the terminal:
+  ```
+  VITE v7.3.1  ready in 279 ms
+
+    ➜  Local:   http://localhost:5173/
+    ➜  Network: http://10.20.0.224:5173/
+  ```
+- Use one of the **Network IPs** (not `localhost`) since testing is on another machine
+- **Note:** IPs shown in this doc and code are for **illustration only** - they will vary based on your network
+
+### Updating the Dev Server IP
+
+When your network IP changes, update these files:
+
+| File | Lines | What to update |
+|------|-------|----------------|
+| `public/app.json` | 8, 10 | `providerUrl` and `defaultWindowOptions.url` |
+| `src/platform.ts` | 20, 41 | View URLs for dynamically created windows |
 
 ## Commands
 
 ```bash
-npm run dev          # Start Vite dev server
-npm run build        # TypeScript compile + Vite build
-npm run lint         # Run ESLint
-npm run start        # Dev server + OpenFin together
-npm run openfin      # Launch OpenFin only
+npm run dev      # Start Vite dev server (with --host for network access)
+npm run build    # TypeScript compile + Vite build
+npm run lint     # Run ESLint
+npm run preview  # Preview production build
 ```
 
 ## OpenFin Integration
@@ -49,15 +65,17 @@ The `fin` type is declared globally in `src/types/openfin.d.ts`. All OpenFin cod
 
 ```
 src/
-├── main.tsx           # React entry point
-├── App.tsx            # Main component
-├── platform-window.ts # Layout initialization for custom window
-├── types/openfin.d.ts # Global fin type declaration
+├── main.tsx             # React entry point (main app)
+├── App.tsx              # Main app component
+├── provider.tsx         # Provider entry point
+├── ProviderApp.tsx      # Provider React component
+├── platform.ts          # Platform initialization logic
+├── platform-window.tsx  # Platform window with React header
+├── types/openfin.d.ts   # Global fin type declaration
 public/
-├── app.json           # OpenFin manifest
-scripts/
-└── launch.mjs         # OpenFin launcher
-platform-window.html   # Custom platform window (frameless)
+├── app.json             # OpenFin manifest
+provider.html            # Provider HTML
+platform-window.html     # Custom platform window (frameless)
 ```
 
 ## Custom Platform Window
@@ -66,19 +84,17 @@ This project uses a **custom platform window** to remove the default OpenFin win
 
 | Component          | Description                                                                                                               | Status      |
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `<title-bar>`      | Custom element with draggable area, theme toggle, menu toggle, layout lock, and window controls (minimize/maximize/close) | **Removed** |
+| `<title-bar>`      | Custom element with draggable area, theme toggle, menu toggle, layout lock, and window controls (minimize/maximize/close) | **Replaced with React** |
 | `<left-menu>`      | Sidebar with view management, layout save/restore, snapshot controls, and preset arrangements                             | **Removed** |
 | `<layout-form>`    | Form for layout configuration                                                                                             | **Removed** |
 | `<snapshot-form>`  | Form for snapshot management                                                                                              | **Removed** |
 | `frame-styles.css` | Styling for custom chrome components                                                                                      | **Removed** |
 | `light-theme.css`  | Light theme styling                                                                                                       | **Removed** |
 
-Our `platform-window.html` contains only the essential `#layout-container` div required by OpenFin's Platform Layout system. This results in:
+Our `platform-window.html` loads a React app (`src/platform-window.tsx`) that provides:
 
-- **No window title bar** - window cannot be dragged
-- **No window controls** - no minimize/maximize/close buttons
-- **View tab headers preserved** - tabs for switching between views in stacks still work
-- **Full edge-to-edge content** - views fill the entire window
+- **Custom React header** - draggable area (uses `-webkit-app-region: drag`) with a Close button
+- **Layout container** - the `#layout-container` div required by OpenFin's Platform Layout system
+- **View tab headers** - tabs for switching between views in stacks still work
 
-The `src/platform-window.ts` script calls `fin.Platform.Layout.init()` to initialize the layout system into the container.
-/
+The `src/platform-window.tsx` component initializes the layout system via `fin.Platform.Layout.init()` in a `useEffect` hook.
