@@ -1,7 +1,5 @@
-import type { Fin } from "@openfin/core";
+import type { fin as FinApi } from "@openfin/core";
 
 declare global {
-  const fin: Fin<"window" | "view"> | undefined;
+  const fin: typeof FinApi;
 }
-
-export {};
