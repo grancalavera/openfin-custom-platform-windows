@@ -1,5 +1,7 @@
+import * as WorkspacePlatform from '@openfin/workspace-platform'
+
 export const initializePlatform = async () => {
-  await fin.Platform.init({});
+  await WorkspacePlatform.init({ browser: null })
   const platform = fin.Platform.getCurrentSync();
   const windowWidth = 640;
 
@@ -17,7 +19,7 @@ export const initializePlatform = async () => {
                 componentName: "view",
                 componentState: {
                   name: "main-view-1",
-                  url: "http://192.168.68.58:5173",
+                  url: "http://192.168.68.64:5173",
                 },
               },
             ],
@@ -38,7 +40,7 @@ export const initializePlatform = async () => {
                 componentName: "view",
                 componentState: {
                   name: "main-view-2",
-                  url: "http://192.168.68.58:5173",
+                  url: "http://192.168.68.64:5173",
                 },
               },
             ],
