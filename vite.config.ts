@@ -13,6 +13,7 @@ export default defineConfig({
         platformWindow: resolve(__dirname, 'platform-window.html'),
         sender: resolve(__dirname, 'sender.html'),
         receiver: resolve(__dirname, 'receiver.html'),
+        coreReceiver: resolve(__dirname, 'core-receiver.html'),
       },
     },
   },
