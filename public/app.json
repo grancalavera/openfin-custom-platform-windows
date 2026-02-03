@@ -6,6 +6,9 @@
     "uuid": "openfin-custom-platform",
     "autoShow": false,
     "providerUrl": "http://192.168.68.64:5173/provider.html",
+    "defaultViewOptions": {
+      "fdc3InteropApi": "2.0"
+    },
     "defaultWindowOptions": {
       "url": "http://192.168.68.64:5173/platform-window.html",
       "defaultWidth": 640,
