@@ -1,10 +1,30 @@
 import { useState } from 'react'
 import { useFdc3 } from './hooks/useFdc3'
-import type { Fdc3Context } from './types/fdc3.d'
+import type { WindowType, Fdc3ContextWithRouting } from './types/intent-routing'
+
+const FX_PAIRS = [
+  'EURUSD',
+  'USDJPY',
+  'GBPUSD',
+  'USDCHF',
+  'AUDUSD',
+  'USDCAD',
+  'NZDUSD',
+  'EURGBP',
+  'EURJPY',
+  'GBPJPY',
+  'AUDJPY',
+  'EURCHF',
+  'GBPCHF',
+  'CADJPY',
+  'AUDNZD',
+]
 
 function SenderView() {
   const fdc3Ready = useFdc3()
-  const [ticker, setTicker] = useState('AAPL')
+  const [ticker, setTicker] = useState('EURUSD')
+  const [windowType, setWindowType] = useState<WindowType>('platform-view')
+  const [createNew, setCreateNew] = useState(true)
   const [status, setStatus] = useState<{ type: 'idle' | 'success' | 'error'; message: string }>({
     type: 'idle',
     message: ''
@@ -16,9 +36,10 @@ function SenderView() {
       return
     }
 
-    const context: Fdc3Context = {
+    const context: Fdc3ContextWithRouting = {
       type: 'fdc3.instrument',
-      id: { ticker }
+      id: { ticker },
+      _routingMetadata: { windowType, createNew }
     }
 
     try {
@@ -40,14 +61,39 @@ function SenderView() {
       </p>
 
       <div className="form-group">
-        <label htmlFor="ticker">Ticker Symbol</label>
-        <input
+        <label htmlFor="ticker">Currency Pair</label>
+        <select
           id="ticker"
-          type="text"
           value={ticker}
-          onChange={(e) => setTicker(e.target.value.toUpperCase())}
-          placeholder="Enter ticker (e.g., AAPL)"
-        />
+          onChange={(e) => setTicker(e.target.value)}
+        >
+          {FX_PAIRS.map(pair => (
+            <option key={pair} value={pair}>{pair}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="windowType">Window Type</label>
+        <select
+          id="windowType"
+          value={windowType}
+          onChange={(e) => setWindowType(e.target.value as WindowType)}
+        >
+          <option value="platform-view">Platform View</option>
+          <option value="core-window">Core Window</option>
+        </select>
+      </div>
+
+      <div className="form-group checkbox-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={createNew}
+            onChange={(e) => setCreateNew(e.target.checked)}
+          />
+          Always create new window
+        </label>
       </div>
 
       <button onClick={handleRaiseIntent} disabled={!fdc3Ready}>
@@ -99,7 +145,7 @@ function SenderView() {
           font-weight: 500;
         }
 
-        .form-group input {
+        .form-group select {
           width: 100%;
           padding: 0.5rem;
           font-size: 1rem;
@@ -109,9 +155,23 @@ function SenderView() {
           color: #f3f4f6;
         }
 
-        .form-group input:focus {
+        .form-group input[type="text"]:focus,
+        .form-group select:focus {
           outline: none;
           border-color: #646cff;
+        }
+
+        .checkbox-group label {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+          width: 1rem;
+          height: 1rem;
+          accent-color: #646cff;
         }
 
         button {
