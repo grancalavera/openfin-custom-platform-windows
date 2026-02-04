@@ -6,8 +6,8 @@ import type {
   PendingIntentRequest,
 } from "./types/intent-routing";
 
-// Base URL for receiver windows - update this when your network IP changes
-const BASE_URL = "http://192.168.68.64:5173";
+// Base URL for receiver windows - dynamically determined from the current page origin
+const BASE_URL = window.location.origin
 
 export const initializePlatform = async () => {
   await WorkspacePlatform.init({

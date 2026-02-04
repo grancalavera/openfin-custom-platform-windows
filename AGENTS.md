@@ -20,12 +20,9 @@ This is an **OpenFin application** built with **Vite**, **React 19**, and **Type
 
 ### Updating the Dev Server IP
 
-When your network IP changes, update these files:
+When your network IP changes, update `public/app.json` (lines 8 and 10) for `providerUrl` and `defaultWindowOptions.url`. These values are read by the OpenFin runtime before JavaScript executes, so they cannot be made dynamic.
 
-| File              | Lines  | What to update                               |
-| ----------------- | ------ | -------------------------------------------- |
-| `public/app.json` | 8, 10  | `providerUrl` and `defaultWindowOptions.url` |
-| `src/platform.ts` | 20, 41 | View URLs for dynamically created windows    |
+**Note:** `src/platform.ts` uses `window.location.origin` to dynamically determine URLs for receiver windows, so it does not require manual updates.
 
 ## Commands
 
