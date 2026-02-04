@@ -8,9 +8,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "index.html"),
-        provider: resolve(__dirname, "provider.html"),
-        platformWindow: resolve(__dirname, "platform-window.html"),
+        main: resolve(__dirname, 'index.html'),
+        provider: resolve(__dirname, 'provider.html'),
+        platformWindow: resolve(__dirname, 'platform-window.html'),
+        sender: resolve(__dirname, 'sender.html'),
+        receiver: resolve(__dirname, 'receiver.html'),
+        coreReceiver: resolve(__dirname, 'core-receiver.html'),
       },
     },
   },

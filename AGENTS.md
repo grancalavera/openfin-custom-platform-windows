@@ -7,23 +7,22 @@ This is an **OpenFin application** built with **Vite**, **React 19**, and **Type
 - Developed on **Mac**, tested on **Windows via Parallels**
 - Run `npm run dev` to start the dev server (uses `--host` flag for network access)
 - Vite will display available Network URLs in the terminal:
+
   ```
   VITE v7.3.1  ready in 279 ms
 
     ➜  Local:   http://localhost:5173/
     ➜  Network: http://10.20.0.224:5173/
   ```
+
 - Use one of the **Network IPs** (not `localhost`) since testing is on another machine
 - **Note:** IPs shown in this doc and code are for **illustration only** - they will vary based on your network
 
 ### Updating the Dev Server IP
 
-When your network IP changes, update these files:
+When your network IP changes, update `public/app.json` (lines 8 and 10) for `providerUrl` and `defaultWindowOptions.url`. These values are read by the OpenFin runtime before JavaScript executes, so they cannot be made dynamic.
 
-| File | Lines | What to update |
-|------|-------|----------------|
-| `public/app.json` | 8, 10 | `providerUrl` and `defaultWindowOptions.url` |
-| `src/platform.ts` | 20, 41 | View URLs for dynamically created windows |
+**Note:** `src/platform.ts` uses `window.location.origin` to dynamically determine URLs for receiver windows, so it does not require manual updates.
 
 ## Commands
 
@@ -82,14 +81,14 @@ platform-window.html     # Custom platform window (frameless)
 
 This project uses a **custom platform window** to remove the default OpenFin window chrome. The standard OpenFin `platform-api-project-seed` includes these components in `platform-window.html`:
 
-| Component          | Description                                                                                                               | Status      |
-| ------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| Component          | Description                                                                                                               | Status                  |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | `<title-bar>`      | Custom element with draggable area, theme toggle, menu toggle, layout lock, and window controls (minimize/maximize/close) | **Replaced with React** |
-| `<left-menu>`      | Sidebar with view management, layout save/restore, snapshot controls, and preset arrangements                             | **Removed** |
-| `<layout-form>`    | Form for layout configuration                                                                                             | **Removed** |
-| `<snapshot-form>`  | Form for snapshot management                                                                                              | **Removed** |
-| `frame-styles.css` | Styling for custom chrome components                                                                                      | **Removed** |
-| `light-theme.css`  | Light theme styling                                                                                                       | **Removed** |
+| `<left-menu>`      | Sidebar with view management, layout save/restore, snapshot controls, and preset arrangements                             | **Removed**             |
+| `<layout-form>`    | Form for layout configuration                                                                                             | **Removed**             |
+| `<snapshot-form>`  | Form for snapshot management                                                                                              | **Removed**             |
+| `frame-styles.css` | Styling for custom chrome components                                                                                      | **Removed**             |
+| `light-theme.css`  | Light theme styling                                                                                                       | **Removed**             |
 
 Our `platform-window.html` loads a React app (`src/platform-window.tsx`) that provides:
 
